@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+{% block content %}
+  
+    
+    <div class="container">
+    <div class="col-sm-12 d-flex p-2 justify-content-center" style="background-image: url('{{ url_for('static',filename='img/bg.png')}}');  background-size: 555px;  margin-top: 7%;">
+    <div class="card">
+      <div class="card-body alert-info">
+
+<form action = "/login" method="post">
+  <div class="form-group">
+    <label for="email">Username:</label>
+    <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" placeholder="Enter password" id="password" name="password">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+<br><br>
+<div class="alert-danger">{{msg}} </div>
+</form> 
+    
+        
+        </div></div></div>  
+    </div>    
+</body>
+</html>
+      
+{% endblock %}

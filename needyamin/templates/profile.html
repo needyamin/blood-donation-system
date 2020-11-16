@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<div class="row">
+<div class="col-sm-3"> </div>
+<div class="col-sm-6 p-2">
+<div class="card">
+    <div class="card-header">
+        <strong class="card-title mb-3"> <a href="#"  onclick="Export()" title="Download As PDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></strong>
+    </div>
+    <div class="card-body">
+        <div class="mx-auto d-block">
+
+
+            <h5 class="text-sm-center mt-2 mb-1">{% for row in rows %} {{row["name"]}}   {% endfor %}</h5>
+            <div class="location text-sm-center"><i class="fa fa-map-marker"></i> {% for row in rows %} {{row["city"]}}  {% endfor %},{% for row in rows %} {{row["district"]}}  {% endfor %}
+            
+            
+            </div>            
+
+        </div>
+        <hr>
+        
+        <div class="card-text text-sm-center">
+
+            <a href="tel:{% for row in rows %} {{row['number']}} {% endfor %}"><i class="fa fa-phone-square" aria-hidden="true"></i></a>
+            <a href="mailto:{% for row in rows %} {{row['email']}} {% endfor %}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+
+        </div>
+    </div>
+
+
+    <table class="table table-user-information" id="table">
+      <tbody>
+        <tr>
+          <td>Email:</td>
+          <td><a href="mailto:{% for row in rows %} {{row['email']}}  {% endfor %}">{% for row in rows %} {{row["email"]}}  {% endfor %}</a></td>
+        </tr>
+        <tr>
+          <td>Phone:</td>
+          <td>{% for row in rows %} {{row["number"]}}  {% endfor %}</td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>{% for row in rows %} {{row["gender"]}}  {% endfor %}</td>
+        </tr>
+     
+           <tr>
+               <tr>
+          <td>Blood Group</td>
+          <td>{% for row in rows %} {{row["blood_group"]}}  {% endfor %}</td>
+        </tr>
+          <tr>
+          <td>Home Address</td>
+          <td>{% for row in rows %} {{row["street"]}}  {% endfor %}, {% for row in rows %} {{row["area"]}}  {% endfor %}</td>
+        </tr>
+      </tbody>
+    </table> 
+
+
+</div>
+
+<div class="col-sm-3"> </div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+  <!-- pdfmake start -->
+<center><div class="card"></div> <input type="button" id="btnExport" value="Export" onclick="Export()" /> </div> </center>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/html-to-pdfmake/docs/browser.js"></script>
+  <!-- pdfmake files: -->
+  <script src='https://cdn.jsdelivr.net/npm/pdfmake@latest/build/pdfmake.min.js'></script> 
+  <script src='https://cdn.jsdelivr.net/npm/pdfmake@latest/build/vfs_fonts.min.js'></script> 
+  <!-- html-to-pdfmake file: -->
+  <script src="https://cdn.jsdelivr.net/npm/html-to-pdfmake/docs/browser.js"></script> 
+
+
+
+
+  <script type="text/javascript">
+    function Export() {
+    //var val = htmlToPdfmake("profile.html");
+    var val = htmlToPdfmake(`
+    <div class="card-body">
+        <div class="mx-auto d-block">
+
+
+            <h5 class="text-sm-center mt-2 mb-1">{% for row in rows %} {{row["name"]}}   {% endfor %}</h5>
+            <div class="location text-sm-center"><i class="fa fa-map-marker"></i> {% for row in rows %} {{row["city"]}}  {% endfor %},{% for row in rows %} {{row["district"]}}  {% endfor %}
+            
+            
+            </div>            
+
+        </div>
+        <hr>
+        
+        <div class="card-text text-sm-center">
+
+            <a href="tel:{% for row in rows %} {{row['number']}} {% endfor %}"><i class="fa fa-phone-square" aria-hidden="true"></i></a>
+            <a href="mailto:{% for row in rows %} {{row['email']}} {% endfor %}"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+
+        </div>
+    </div>
+
+
+    <table class="table table-user-information" id="table">
+      <tbody>
+        <tr>
+          <td>Email:</td>
+          <td><a href="mailto:{% for row in rows %} {{row['email']}}  {% endfor %}">{% for row in rows %} {{row["email"]}}  {% endfor %}</a></td>
+        </tr>
+        <tr>
+          <td>Phone:</td>
+          <td>{% for row in rows %} {{row["number"]}}  {% endfor %}</td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>{% for row in rows %} {{row["gender"]}}  {% endfor %}</td>
+        </tr>
+     
+           <tr>
+               <tr>
+          <td>Blood Group</td>
+          <td>{% for row in rows %} {{row["blood_group"]}}  {% endfor %}</td>
+        </tr>
+          <tr>
+          <td>Home Address</td>
+          <td>{% for row in rows %} {{row["street"]}}  {% endfor %}, {% for row in rows %} {{row["area"]}}  {% endfor %}</td>
+        </tr>
+      </tbody>
+    </table> `, {
+  tableAutoSize:true
+});
+    var dd = {content:val};
+    pdfMake.createPdf(dd).download();
+     }</script>
+
+<!-- pdfmake end -->
+
+
+{% endblock %}  

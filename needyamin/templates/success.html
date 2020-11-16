@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+    
+<div class="container-fluid">  
+  
+    
+<div class='alert bg-success' role='alert' style="background-image: url('{{ url_for('static',filename='img/slider3.jpg')}}');  background-color: white;">
+<div class="card">
+  <div class="card-body bg-success text-white" style="border-radius: 5px;">
+<div class="row justify-content-center">
+
+        <h2>{{msg}}</h2></div>
+  </div>
+</div></div>
+    
+    
+<script> //windows-alert hidden future needyamin
+window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 2000);
+</script>
+ 
+<div class="text-center">  
+    
+<style>
+
+     
+.hide {
+  display: none;
+}
+.myDIV:hover + .hide {
+  display: block;
+  color: red;
+text-align: top;
+}        
+        
+        
+</style>
+    
+    
+    
+<div class="container">   
+<div class="row p-1">
+   <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+    
+
+<div class="myDIV">
+        
+<img src="{{ url_for('static',filename='img/drop.png')}}" class="img-fluid" width="40%">  
+        
+ </div> <div class="hide">You are a real superhero!</div>
+
+         <h2>Thank you for share your blood group..</h2> 
+          
+          
+             </div>
+                </div>
+                   </div>  
+                       </div>
+                            </div></div> </div> 
+
+    
+                            {% endblock %}

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+    
+<div class="container">
+  <div class="row">
+    <div class="col"> 
+
+<div class="container p-1">
+<div class="row justify-content-center p-2 bg-success text-white">
+    <h2>Your blood can save others life.. Blood donation is your responsibility</h2></div> </div>
+      <hr>
+    
+<table id="needyamin_data" class="table-sm table-striped table-bordered" style="text-align: center;">
+    
+        <thead>
+            <tr>
+                <th>District</th>
+                <th>City</th>
+                <th>Area</th>
+                <th>Age</th>
+                <th>Blood Group</th>
+                <th>Type</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+           
+ 
+         {% for row in rows %}  
+              <tr>
+                <td>{{row["district"]}}</td>
+                <td>{{row["city"]}}</td>
+                <td>{{row["area"]}}</td>
+                <td>{{row["age"]}}</td>
+                <td>{{row["blood_group"]}}</td>
+                <td>{{row["donar_type"]}}</td>
+                <td><button type="button" class="btn-sm btn-info" data-toggle="modal" data-target="#needyaminModal" data-whatever="@getbootstrap">Request</button> </td>
+            </tr>
+
+
+
+
+<!--Model form start-->
+    <div class="modal fade" id="needyaminModal" tabindex="-1" role="dialog" aria-labelledby="needyaminModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="needyaminModalLabel">Request</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           
+            <form action="/requests" method="post">
+              <div class="form-group">
+                <input type="hidden" name="id" value="{{row['id']}}" class="form-control" id="recipient-name">
+
+                <label for="recipient-name" class="col-form-label">Your Name:</label>
+                <input type="text" name="name" class="form-control" id="recipient-name" required="">
+              </div>
+                
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Your Email:</label>
+                <input type="email" name="email" class="form-control" id="recipient-name" required="">
+              </div>
+                
+             <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Phone:</label>
+                <input type="phone" name="phone" class="form-control" id="recipient-name" required="">
+              </div>
+                
+
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Hospital/Clinic Name</label>
+                <input type="text" name="hospital" class="form-control" id="recipient-name">
+              </div>
+                
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message" name="message"></textarea>
+              </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" name="submit" id="submit" value="submit" class="btn btn-primary">
+          </div>
+
+        </form>
+        </div>
+      </div>
+    </div>
+<!--Model form ends-->   
+
+
+           {% endfor %}  
+
+
+        </tbody>
+     
+    </table>
+
+
+       
+
+
+
+    
+    </div> </div></div>
+    
+
+    {% endblock %}  
+      

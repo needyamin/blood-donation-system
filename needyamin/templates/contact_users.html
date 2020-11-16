@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static',filename='stylesheet/style.css')}}">     
+
+<div class="container">
+  <div class="row">
+    <div class="col"> 
+
+<div class="container p-1">
+<div class="row justify-content-center p-2 bg-success text-white">
+    <h2>Contact Us Request List</h2></div> </div>
+      <hr>
+      <div class="alert-danger">{{msg}} </div>
+
+
+
+
+<table id="needyamin_data" class="table-sm table-striped table-bordered" style="text-align: center;">
+
+  
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th>Gender</th>
+                <th>Blood Group</th>
+                <th>Message</th>
+                <th>IP</th>
+                <th>Creation Date</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+           
+ 
+         {% for row in rows %}  
+              <tr>
+                <td>{{row["name"]}}</td>
+                <td>
+                  
+                
+                  <div class="btn btn-light" data-toggle="collapse" data-target="#email{{row['id']}}" title="Click for View Email">***@***.com</div>
+                  <div id="email{{row['id']}}" class="collapse btn-dark" style="padding: 5px;">
+                    {{row["email"]}} </div>
+                
+                </td>
+                <td>
+
+ <div class="btn btn-light" data-toggle="collapse" data-target="#phone{{row['id']}}" title="Click for View Number">+****</div>
+<div id="phone{{row['id']}}" class="collapse btn-dark" style="padding: 5px;">
+  {{row["number"]}} </div>
+  
+</td>
+                <td>{{row["gender"]}}</td>
+                <td> {{row["blood_group"]}}</td>
+                <td> 
+                  {{row['message']}}
+
+                </td>
+
+                <td>{{row["ip"]}} </td>
+                <td>{{row["date"]}}</td>
+                <td> 
+                  
+        
+      <div class="row">
+    
+
+    <div class="col-sm">
+      <form action="contact_del" method="POST"> 
+     <input type="hidden" name="id" value="{{row['id']}}"> 
+     <button type="submit" name="submit" value="Delete" class="alert-danger">
+     <i class="fas fa-trash-alt"></i></button>
+    </form> 
+    </div>
+
+  
+  </div>
+
+
+    
+    </td>
+            </tr>
+           {% endfor %}  
+
+
+        </tbody>
+     
+    </table>
+
+    
+    </div> </div></div>
+    
+
+    {% endblock %}  
+      
